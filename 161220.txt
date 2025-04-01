@@ -1,0 +1,84 @@
+
+== Dokumentacija za laboratoriska vezhba 1 ==
+Student: Andrej Petrushevski
+Broj na indeks: 161220
+Datum: 01.04.2025
+
+--------------------------------------------
+[1] Inicijalizacija na projekt:
+--------------------------------------------
+git clone https://github.com/AndRo0505/SI_2025_lab1_161220.git
+cd SI_2025_lab1_161220
+
+--------------------------------------------
+[2] Kreiranje na branch za issue #3 (removeTaskByName):
+--------------------------------------------
+git fetch origin
+git checkout -b 3-remove-a-task-by-name origin/3-remove-a-task-by-name
+
+>> Implementiran metod:
+public void removeTaskByName(String name) {
+    tasks.removeIf(task -> task.getName().equalsIgnoreCase(name));
+}
+
+git add .
+git commit -m "Implement removeTaskByName method"
+git push origin 3-remove-a-task-by-name
+
+Pull request kreiran i merge-iran preko GitHub. Issue avtomatski premesten vo "Done".
+
+--------------------------------------------
+[3] Kreiranje na branch za issue #6 (sortTasksByPriority):
+--------------------------------------------
+git checkout -b 6-sort-tasks-by-priority origin/6-sort-tasks-by-priority
+
+>> Implementiran metod:
+public List<Task> sortTasksByPriority() {
+    List<Task> sorted = new ArrayList<>(tasks);
+    sorted.sort(Comparator.comparing(Task::getPriority).reversed());
+    return sorted;
+}
+
+git add .
+git commit -m "Implement sortTasksByPriority method"
+git push origin 6-sort-tasks-by-priority
+
+Pull request kreiran i merge-iran preko GitHub. Issue avtomatski premesten vo "Done".
+
+--------------------------------------------
+[4] Kreiranje na branch za issue #9 (countTasksPerCategory):
+--------------------------------------------
+git checkout -b 9-count-tasks-per-category origin/9-count-tasks-per-category
+
+>> Implementiran metod:
+public Map<String, Integer> countTasksPerCategory() {
+    Map<String, Integer> countMap = new HashMap<>();
+    for (Task task : tasks) {
+        String category = task.getCategory();
+        countMap.put(category, countMap.getOrDefault(category, 0) + 1);
+    }
+    return countMap;
+}
+
+git add .
+git commit -m "Implement countTasksPerCategory method"
+git push origin 9-count-tasks-per-category
+
+>> Merge lokalno:
+git checkout master
+git pull origin master
+git merge 9-count-tasks-per-category
+git push origin master
+
+>> Objasnuvanje:
+- Konfikt: Ne
+- Strategija: Fast-forward merge
+
+--------------------------------------------
+[5] Finalni fajlovi:
+--------------------------------------------
+git log --oneline --graph --all > logs.txt
+
+git add logs.txt 161220.txt
+git commit -m "Final commit"
+git push origin master
